@@ -8,6 +8,6 @@ class Game
 		void Update(float dt);
 		void Render();
 
-	   private:
+	   public:
 		   Player1 m_player;
 };
