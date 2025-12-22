@@ -5,11 +5,13 @@ class Player1
 {
     public:
         Player1();
-
+        void Load();
+        void init();
         void Update(float dt);
         void Render();
         void Rotate(float amount);
         void Thrust();
+        
 
     private:
         Vector2 m_position;

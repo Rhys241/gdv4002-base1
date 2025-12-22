@@ -2,6 +2,8 @@
 #include <cmath>
 #include "texture_loader.h"
 #include <iostream>
+#include <fstream>
+#include <vector>
 
 Player1::Player1()
 {
@@ -9,7 +11,15 @@ Player1::Player1()
 	m_rotation = 0.0f;
 	m_speed = 5.0f;
 
-	m_textureID = fiLoadTexture("Assets/player.png", TextureProperties());
+	m_textureID = 0;
+	std::cout << "Texture ID = " << m_textureID << "\n";
+}
+
+void Player1::Load()
+{
+	std::cout << "Load() was called\n";
+
+	m_textureID = fiLoadTexture("player1.png", TextureProperties());
 	std::cout << "Texture ID = " << m_textureID << "\n";
 }
 

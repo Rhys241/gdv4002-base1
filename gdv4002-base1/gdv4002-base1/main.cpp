@@ -53,6 +53,8 @@ int main(void)
 		return initResult; // exit if setup failed
 	}
 
+	game.m_player.Load();
+	
 	//callback engine
 	
 	//
