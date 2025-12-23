@@ -3,11 +3,10 @@
 #include "Asteroid.h"
 #include "Bullet.h"
 #include "Player1.h"
-
+#include <cmath>
 
 Game::Game()
 {
-	std::vector<Asteroid> asteroids; //asteroid spawn
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -20,6 +19,7 @@ Game::Game()
 		asteroids.emplace_back(Vector2(x, y), Vector2(vx, vy));
 	}
 }
+
 
 void Game::Update(float dt)
 {
@@ -34,8 +34,39 @@ void Game::Update(float dt)
 	{
 		a.Update(dt);
 	}
-}
 
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		for (int j = 0; j < asteroids.size(); j++)
+		{
+			float dx = bullets[i].position.x - asteroids[j].position.x;
+			float dy = bullets[i].position.y - asteroids[j].position.y;
+			float dist = sqrt(dx * dx + dy * dy);
+
+			if (dist < 0.05f)
+			{
+				asteroids.erase(asteroids.begin() + j);
+				bullets.erase(bullets.begin() + i);
+				i--;
+				break;
+			}
+		}
+	}
+
+	for (auto& a : asteroids)
+	{
+		float dx = a.position.x - m_player.m_position.x;
+		float dy = a.position.y - m_player.m_position.y;
+		float dist = sqrt(dx * dx + dy * dy);
+
+		if (dist < 0.07f)
+		{
+			printf("Player hit\n");
+		}
+	}
+
+
+}
 
 void Game::Render()
 {
@@ -52,4 +83,3 @@ void Game::Render()
 	}
 }
 
-std::vector<Asteroid> asteroids;

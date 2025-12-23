@@ -2,11 +2,6 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 
-Asteroid::Asteroid(Vector2 pos, Vector2 vel)
-{
-	position = pos;
-	velocity = vel;
-}
 
 void Asteroid::Update(float dt)
 {

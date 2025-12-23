@@ -2,6 +2,7 @@
 #include "Player1.h"
 #include <vector>
 #include "Bullet.h"
+#include "Asteroid.h"
 
 class Game
 {
@@ -9,6 +10,7 @@ class Game
 		Game();
 		void Update(float dt);
 		void Render();
+		std::vector<Asteroid> asteroids;
 
 	   public:
 		   Player1 m_player;
