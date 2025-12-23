@@ -7,9 +7,9 @@
 
 Player1::Player1()
 {
-	m_position = Vector2(512, 512); //centre of the screen
+	m_position = Vector2(0, 0); //centre of the screen
 	m_rotation = 0.0f;
-	m_speed = 5.0f;
+	m_speed = 0.1f;
 
 	m_textureID = 0;
 	std::cout << "Texture ID = " << m_textureID << "\n";
@@ -41,14 +41,20 @@ void Player1::Render()
 	glTranslatef(m_position.x, m_position.y, 0.0f);
 	glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
 
-	glBindTexture(GL_TEXTURE_2D, m_textureID);
+	glDisable(GL_TEXTURE_2D);
 
-	glBegin(GL_QUADS);
-	glTexCoord2f(0, 0); glVertex2f(-32, -32);
-	glTexCoord2f(1, 0); glVertex2f(32, -32);
-	glTexCoord2f(1, 1); glVertex2f(32, 32);
-	glTexCoord2f(0, 1); glVertex2f(-32, 32);
+	glBegin(GL_TRIANGLES);
+    glColor3f(0.2f, 0.8f, 1.0f);
+
+	glVertex2f(0.0f, 0.2f);
+
+	glVertex2f(-0.15f, -0.15f);
+
+	glVertex2f(0.15f, -0.15f);
+
 	glEnd();
+
+	glEnable(GL_TEXTURE_2D);
 
 	glPopMatrix();
 }
