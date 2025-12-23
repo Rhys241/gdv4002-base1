@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Game.h"
+#include <cmath>
 
 Game game;
 
@@ -23,7 +24,22 @@ void keyboardHandler(GLFWwindow* window, int key, int scancode, int action, int 
 		{
 			game.m_player.Thrust();
 		}
-	
+	    
+		if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+		{
+			float radians = game.m_player.GetRotation() * 3.14159f / 180.0f;
+
+			Vector2 dir(cos(radians), sin(radians));
+
+			Vector2 bulletPos = game.m_player.m_position;
+			Vector2 bulletVel = dir * 1.5f; // speed
+
+			game.bullets.emplace_back(bulletPos, bulletVel);
+
+			printf("bullet fired! count = %zu/n", game.bullets.size());
+
+
+		}
 	
 	}
 

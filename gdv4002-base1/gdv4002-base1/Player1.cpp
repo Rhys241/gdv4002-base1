@@ -30,7 +30,11 @@ void Player1::Rotate(float amount)
 
 void Player1::Update(float dt)
 {
-	//movement
+	if (m_position.x > 1.0f) m_position.x = -1.0f;
+	if (m_position.x < -1.0f) m_position.x = 1.0f;
+
+	if (m_position.y > 1.0f) m_position.y = -1.0f;
+	if (m_position.y < -1.0f) m_position.y = 1.0f;
 }
 
 void Player1::Render()
@@ -46,11 +50,11 @@ void Player1::Render()
 	glBegin(GL_TRIANGLES);
     glColor3f(0.2f, 0.8f, 1.0f);
 
-	glVertex2f(0.0f, 0.2f);
+	glVertex2f(0.0f, 0.0f);
 
-	glVertex2f(-0.15f, -0.15f);
+	glVertex2f(-0.15f, -0.35f);
 
-	glVertex2f(0.15f, -0.15f);
+	glVertex2f(0.15f, -0.35f);
 
 	glEnd();
 

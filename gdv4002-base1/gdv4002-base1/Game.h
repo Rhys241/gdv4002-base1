@@ -1,5 +1,7 @@
 #pragma once
 #include "Player1.h"
+#include <vector>
+#include "Bullet.h"
 
 class Game
 {
@@ -10,4 +12,7 @@ class Game
 
 	   public:
 		   Player1 m_player;
+		   std::vector<Bullet> bullets;
+
+		  
 };
