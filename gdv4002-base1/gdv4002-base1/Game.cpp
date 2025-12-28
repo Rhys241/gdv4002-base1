@@ -4,6 +4,9 @@
 #include "Bullet.h"
 #include "Player1.h"
 #include <cmath>
+#include <Windows.h>
+
+
 
 Game::Game()
 {
@@ -20,9 +23,40 @@ Game::Game()
 	}
 }
 
+void Game::RestartGame()
+{
+	m_player.m_position = Vector2(0.0f, 0.0f);
+
+	asteroids.clear();
+	for (int i = 0; i < 5; i++)
+	{
+		float x = (rand() % 200 - 100) / 100.0f;
+		float y = (rand() % 200 - 100) / 100.0f;
+
+		float vx = (rand() % 100 - 50) / 500.0f;
+		float vy = (rand() % 100 - 50) / 500.0f;
+
+		asteroids.emplace_back(Vector2(x, y), Vector2(vx, vy));
+
+	}
+
+	bullets.clear();
+	gameOver = false;
+
+	printf("Restart Game\n");
+}
 
 void Game::Update(float dt)
 {
+	if (gameOver)
+	{
+		if (GetAsyncKeyState('R') & 0x8000)
+		{
+			RestartGame();
+		}
+		return;
+	}
+
 	m_player.Update(dt);
 
 	for (auto& b : bullets)
@@ -61,15 +95,19 @@ void Game::Update(float dt)
 
 		if (dist < 0.07f)
 		{
-			printf("Player hit\n");
+			printf("\n=== Player hit ===\n");
+			printf(" Press R to Reattempt\n\n");
+			gameOver = true;
 		}
 	}
 
-
+  
 }
+
 
 void Game::Render()
 {
+
 	m_player.Render();
 
 	for (auto& b : bullets)
